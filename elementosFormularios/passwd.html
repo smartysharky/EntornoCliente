@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        Password se usa para introducir una contraseña.
+        En este ejemplo, con el elemento checkPasswd() guardo ambas contraseñas en dos variables y compruebo si son iguales.
+    -->
+    <head>
+        <title>Password</title>
+        <script>
+            function checkPasswd(){
+                passwd = document.getElementById("passwd").value;
+                passwd2 = document.getElementById("passwd2").value;
+
+                if(passwd == passwd2){
+                    document.getElementById("result").innerHTML = 
+                    "Las contraseñas coinciden";
+                    document.getElementById("passwd").value = "";
+                    document.getElementById("passwd2").value = "";
+                }else{
+                    document.getElementById("result").innerHTML = 
+                    "Las contraseñas NO coinciden";
+                    document.getElementById("passwd").value = "";
+                    document.getElementById("passwd2").value = "";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Password</h1>
+        <label for="passwd">Introduzca la contraseña:</label>
+        <input type="password" id="passwd" name="passswd" required>
+        <br>
+        <label for="passwd2">Vuelva a introducir la contraseña:</label>
+        <input type="password" id="passwd2" name="passswd2" required>
+        <br>
+        <button onclick="checkPasswd()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

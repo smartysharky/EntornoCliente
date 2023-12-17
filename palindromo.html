@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function esPalindrmo() {
+            cadena = document.getElementById("pali").value;
+
+            end = cadena.length - 1;
+            i = 0;
+
+            while (i < end) {
+
+                if (cadena[i] != cadena[end]) {
+                    return false;
+                }
+                i++;
+                end--;
+            }
+            return true;
+
+        }
+
+        function inicio() {
+            if (esPalindrmo()) {
+
+                document.getElementById("respuesta").innerHTML = "si";
+            } else {
+
+                document.getElementById("respuesta").innerHTML = "no";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <label for="palindromo">Introduzca el texto: </label>
+    <input type="text" name="palindromo" id="pali"> <br>
+    <button onclick="inicio()">Check</button>
+    <p id="respuesta"></p>
+    <p id="prueba"></p>
+</body>
+
+</html>

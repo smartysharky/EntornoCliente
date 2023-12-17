@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prueba eventos</title>
+        <style>
+            div {
+                background-color: rgb(60, 235, 118);
+            }
+        </style>
+
+    </head>
+    <body onload="iniciar()">
+        <script>
+            function setTexto01(){
+                document.getElementById("prueba").innerHTML = "Quita el ratón!!!";
+            }
+
+            function setTextoInic(){
+                document.getElementById("prueba").innerHTML = "Pasa el ratón...";
+            }
+
+            function iniciar(){
+                document.getElementById("prueba").innerHTML = "Pasa el por primera vez...";
+            }
+        </script>
+
+        <div id="prueba" onmouseover="setTexto01()" onmouseout="setTextoInic()"></div>
+    </body>
+</html>

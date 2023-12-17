@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Circunferencia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // elemento canvas
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // propiedades de ciculo
+            //el centro del circulo esta en el centro del canvas, por lo tanto altura/2 y ancho/2
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 250;
+
+            // Configurar el ángulo inicial en la parte superior del círculo
+            var startAngle = -Math.PI / 2;
+
+            var angle = startAngle;
+            var parts = 60; // Dividir el círculo en el numero de partes deseadas partes
+            var interval = 1000; // Intervalo de tiempo en milisegundos
+
+            var drawPart = function () {
+                var endAngle = angle + (2 * Math.PI) / parts;
+
+                // Borrar el contenido anterior del canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Dibujar la circunferencia completa
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Iniciar un nuevo trazado para el radio
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY); // Mover al centro del círculo
+                ctx.lineTo(
+                    centerX + radius * Math.cos(angle), // Coordenada x del extremo del radio
+                    centerY + radius * Math.sin(angle)  // Coordenada y del extremo del radio
+                );
+                ctx.stroke();
+
+                // Actualizar el ángulo para la siguiente parte del círculo
+                angle = endAngle;
+            };
+
+            var intervalId = setInterval(drawPart, interval);
+
+        });
+
+    </script>
+</body>
+
+</html>

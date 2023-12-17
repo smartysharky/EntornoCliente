@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fibonacci</title>
+        <script>
+            function calcularFibonacci(num){
+                if(num == 0){
+                    return 0;
+                }else if (num == 1){
+                    return 1;
+                }else{
+                    return calcularFibonacci(num-1) + calcularFibonacci(num-2); 
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p id="prueba"></p>
+        <script>
+            document.getElementById("prueba").innerHTML = calcularFibonacci(8);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Circunferencia</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="150" height="150" ></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // elemento canvas
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // propiedades de ciculo
+            //el centro del circulo esta en el centro del canvas, por lo tanto altura/2 y ancho/2
+            var centerX = canvas.width / 2; 
+            var centerY = canvas.height / 2;
+            var radius = 50;
+
+            // dibuja el circulo
+            ctx.beginPath();
+            /*
+            centerX centerY -> el centro del circulo
+            radius -> el radio. distancia que hay desde el centro de la circunferencia a el perímetro
+            (0, 2 * Math.PI) -> ángulo representa una circunferencia completa por eso es el ángulo de finalización
+            false -> (opcional) si se dibuja al contrario de las agujas del reloj o no
+            */
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            ctx.stroke();
+        });
+
+    </script>
+</body>
+
+</html>

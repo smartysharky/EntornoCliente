@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pruebas con expresiones regulares</title>
+</head>
+
+<body>
+    <script>
+        var txt = "En un lugar de La Mancha...";
+        document.write(txt.search("de"));
+        document.write("<br />" + txt.replace("de","DE"));
+
+        document.write("<br />" + txt.search(/e la/i));
+        document.write("<br />" + txt.replace(/e la/i, "E LA"));
+
+        document.write("<br />" + txt.match(/lu+/i));
+
+        document.write("<br />" + (/lu+/i).test(txt));
+
+        var patron = /lu+/i;
+        document.write("<br />" + patron.exec(txt));
+    </script>
+</body>
+
+</html>

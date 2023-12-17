@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function showNums() {
+            cantidad1 = document.getElementById("num1").value;
+            nums1String = document.getElementById("l1").value;
+            nums1 = nums1String.split(',');
+
+            cantidad2 = document.getElementById("num2").value;
+            nums2String = document.getElementById("l2").value;
+            nums2 = nums2String.split(',');
+
+            respuesta = "";
+
+            if (nums1.length != cantidad1 | nums2.length != cantidad2) {
+                window.alert('La cantidad de números no coincide con la introducida')
+            } else {
+                if (cantidad1 == cantidad2) {
+                    for (i = 0; i < cantidad1; i++) {
+                        (i == 0) ? respuesta += nums1[i] + ',' + nums2[i] : respuesta += ',' + nums1[i] + ',' + nums2[i];
+                    }
+                } else if (cantidad1 > cantidad2) {
+                    for (i = 0; i < cantidad2; i++) {
+                        (i == 0) ? respuesta += nums1.shift() + ',' + nums2[i] : respuesta += ',' + nums1.shift() + ',' + nums2[i];
+                    }
+
+                    restoNums1 = nums1.toString();
+                    respuesta += ',' + restoNums1;
+                } else if (cantidad2 > cantidad1) {
+                    for (i = 0; i < cantidad1; i++) {
+                        (i == 0) ? respuesta += nums1[i] + ',' + nums2.shift() : respuesta += ',' + nums1[i] + ',' + nums2.shift();
+                    }
+
+                    restoNums2 = nums2.toString();
+                    respuesta += ',' + restoNums2;
+                }
+
+                document.getElementById('result').innerHTML = respuesta;
+
+            }
+
+        }
+
+        function borrarDatos() {
+            document.getElementById("frm01").reset();
+        }
+
+    </script>
+</head>
+
+<body>
+    <form action="" id="frm01">
+        <label for="lista1">Lista 1</label><br>
+        <input type="text" name="lista1" id="l1"><input list="numbers1" id="num1" size="2">
+        <datalist id="numbers1">
+            <option value="1">
+            <option value="2">
+            <option value="3">
+            <option value="4">
+            <option value="5">
+        </datalist>
+
+        <br>
+
+
+        <label for="lista2">Lista 2</label><br>
+        <input type="text" name="lista2" id="l2"><input list="numbers2" id="num2" size="2">
+        <datalist id="numbers2">
+            <option value="1">
+            <option value="2">
+            <option value="3">
+            <option value="4">
+            <option value="5">
+        </datalist>
+        <br>
+    </form>
+
+    <button onclick="showNums()">Run</button>
+    <button onclick="borrarDatos()">Reset</button>
+    <p id="result"></p>
+</body>
+
+</html>

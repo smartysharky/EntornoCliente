@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>La información es poder</title>
+</head>
+
+<body id="id01">
+    <p>hola</p>
+    <div>
+        <label>Imagen</label>
+        <img src="img/rana-Gustavo.jpg" width="250px">
+    </div>
+    <footer>Datos de <strong>contacto</strong></footer>
+
+    <script>
+        var x = document.getElementById("id01");
+        console.log(x.nodeName);
+        console.log(x.nodeType);
+        console.log(x.nodeValue);
+
+        var childs = document.getElementById("id01").childNodes;
+        console.log(childs.length);
+
+
+        console.log("-")
+
+        childs.forEach(element => {
+            if (element.nodeName != "#text") {
+                console.log(element.nodeName);
+                console.log(element.nodeType);
+                console.log(element.nodeValue);
+                console.log("-")
+            }
+        });
+    </script>
+</body>
+
+</html>

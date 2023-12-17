@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        Checkbox es un elemento que nos permite seleccioinar varios valores.
+        En este ejemplo hay tres inputs de tipo checkbox, cada uno tiene un id único,
+        pero tienen el mismo nombre, lo que indica que pertenecen al mismo grupo.
+        En la función getDragon(), metemos todos los checkboxes en un array, esto lo hacemos con la función getElementsByName,
+        a diferencia de normalemente, que usamos la función getElementById. Ese array lo recorremos y vemos cuales están seleccionados,
+        añadiendolos a un string que lugo mostramos por pantalla.
+    -->
+    <head>
+        <title>Checkbox</title>
+        <script>
+            function getDragon(){
+                result = "<b>Características del dragón:</b> ";
+                charac = document.getElementsByName("characDragon");
+                charac.forEach(element => {
+                    if (element.checked){
+                        result += element.value + ", ";
+                    }
+                });
+                document.getElementById("result").innerHTML = result;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Checkbox</h1>
+        <fieldset>
+            <legend>Elije las características qur tiene tu dragón:</legend>
+            <label>
+                <input type="checkbox" id="escamas" name="characDragon" value="Escamas"/>
+                Escamas
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" id="cuernos" name="characDragon" value="Cuernos"/>
+                Cuernos
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" id="alas" name="characDragon" value="Alas"/>
+                Alas
+            </label>
+        </fieldset>
+        <button onclick="getDragon()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

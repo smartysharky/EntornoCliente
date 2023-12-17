@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tira y afloja</title>
+    <meta charset="utf-8">
+    <script>
+        const MAX = 1000;
+        const MIN = 500;
+        result = 5;
+
+        function startGame() {
+            timoutA = setTimeout(result--, Math.random() * (MAX - MIN) + MIN);
+            timeoutB = setTimeout(result++, Math.random() * (MAX - MIN) + MIN);
+
+            if (result == 1) {
+                document.getElementById("num").innerHTML = result + " GANADOR: JUGADOR A";
+                clearTimeout(timoutA);
+                clearInterval(timeoutB);
+            } else if (result == 10) {
+                document.getElementById("num").innerHTML = result + " GANADOR: JUGADOR B";
+                clearTimeout(timoutA);
+                clearInterval(timeoutB);
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <p>JUGADOR A(1)</p>
+    <p id="num"></p>
+    <p>JUGADOR B(10)</p>
+    <button type="button" onclick="startGame()">Empezar</button>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Intenisidad y potencia</title>
+    <script>
+
+        function calcInt() {
+            volt = document.getElementById("volt").value;
+            res = document.getElementById("res").value;
+            err_msg = document.getElementById("err-mesg");
+            err_msg.innerHTML = "";
+
+            try {
+                if (volt === "" || res === "") throw "Faltan datos";
+                volt = parseInt(volt);
+                res = parseInt(res);
+                if (isNaN(volt) || isNaN(res)) throw "Los datos tienen que ser números";
+                if(res <= 0) throw "La resitencia tiene que ser mayor que 0";
+
+                int = volt / res;
+                result = Math.round(int * 100) / 100;
+
+                document.getElementById("int").value = result;
+            } catch(err) {
+
+            }
+
+
+        }
+
+        function calcPot() {
+            volt = document.getElementById("volt").value;
+            res = document.getElementById("res").value;
+            err_msg = document.getElementById("err-mesg");
+            err_msg.innerHTML = "";
+
+            try {
+                if (volt === "" || res === "") throw "Faltan datos";
+                volt = parseInt(volt);
+                res = parseInt(res);
+                if (isNaN(volt) || isNaN(res)) throw "Los datos tienen que ser números";
+                if(res <= 0) throw "La resitencia tiene que ser mayor que 0";
+
+                pot = (volt / res) * volt
+                result = Math.round(pot * 100) / 100;
+
+                document.getElementById("pot").value = result;
+            } catch(err) {
+                err_msg.innerHTML = "Error: " + err;
+            }
+
+
+        }
+
+        function calculate() {
+            calcInt();
+            calcPot();
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Calculo de Intenisidad y Poencia</h1>
+    <table border="1">
+        <tr>
+            <td>
+                <label for="volt">Voltaje:
+                    <input type="text" id="volt" name="volt" size="3">
+                </label>
+            </td>
+            <td>
+                <label for="res">Resistencia:
+                    <input type="text" id="res" name="res" size="3">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button name="calc1" onclick="calculate()">Calcular</button>
+                <button name="calc1" onclick="calculate()">Calcular</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="int">Intensidad:
+                    <input type="text" id="int" name="int" size="3" readonly>
+                </label>
+                <label for="pot">Potencia:
+                    <input type="text" id="pot" name="pot" size="3" readonly>
+                </label>
+            </td>
+        </tr>
+    </table>
+    <p id="err-mesg"></p>
+</body>
+
+</html>

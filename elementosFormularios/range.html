@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        El elemenoto range nos deja introducir un valor numérico a traves de un slider.
+        EN getRange() se mete el valor del slider en una variable y luego se muestra por pantalla
+    -->
+    <head>
+        <title>Range</title>
+        <script>
+            function getRange(){
+                pt = document.getElementById("pt").value;
+                document.getElementById("result").innerHTML = "Puntuación: " + pt;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Range</h1>
+        <label for="points">Puntuación:</label>
+        <input type="range" name="points" id="pt" min="0" max="10">
+        <br>
+        <button onclick="getRange()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

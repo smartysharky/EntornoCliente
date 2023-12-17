@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ejercico fecha</title>
+        <script>
+            function getDate(){
+                const months = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+                d = document.getElementById("date").value;
+                date = d.split("-");
+                document.getElementById("result").innerHTML = months[parseInt(date[1])-1] + ", día " + date[0] + " del año de nustro señor " + date[2];
+            }
+            
+        </script>
+    </head>
+    <body>
+        <label for="date">Fecha: 
+            <input type="text" id="date" name="date">
+        </label>
+        <br>
+        <button type="submit" onclick="getDate()">Enviar</button>
+        <p id="result"></p>
+    </body>
+</html>

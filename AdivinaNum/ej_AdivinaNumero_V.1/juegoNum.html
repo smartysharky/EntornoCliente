@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Juego del número</title>
+    <meta charset="utf-8">
+    <script src="juegoNum.js"></script>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Adivina el número</h1>
+
+    <label for="guessingNum">Introduzca un número: </label>
+    <input type="number" id="guess" name="guessingNumber" min="1" max="10">
+
+    <p id="awnser"></p>
+    <button type="button" onclick="checkNums()">Jugar</button>
+
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Aciertos</th>
+            <th>Fallos</th>
+        </tr>
+        <tr>
+            <td id="right">0</td>
+            <td id="wrong">0</td>
+        </tr>
+    </table>
+    
+</body>
+
+</html>

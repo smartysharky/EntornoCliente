@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Pruebas con date</title>
+    <meta charset="utf-8">
+    <script>
+        function getDate() {
+            date = document.getElementById("date").value;
+            document.getElementById("result").innerHTML = date;
+        }
+    </script>
+</head>
+
+<body>
+    <label for="date1">Fecha:
+        <input type="date" id="date1" name="date1">
+    </label>
+    <br>
+    <button type="submit" onclick="getDate()">RUN</button>
+    <br>
+    <p id="result"></p>
+    <!-- IT DOESN'T WORK
+    <script>
+        today = new Date();
+
+        dd = today.getDate();
+        mm = today.getMonth() + 1;
+        yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        todayString = document.getElementById("date1").setAttribute("max", today);
+    </script>
+    -->
+</body>
+
+</html>

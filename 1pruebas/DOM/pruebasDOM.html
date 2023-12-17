@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pruebas con DOM</title>
+</head>
+
+<body>
+    <p>Hello</p>
+    <p>Bye</p>
+    <p class="mi_parrafo">Un parrafo</p>
+    <p class="mi_parrafo">Otro parrafo</p>
+    <script>
+        var parrafos = document.getElementsByTagName("p");
+        var i = 0;
+
+        while (parrafos[i]) {
+            document.write("<br>");
+            document.write("Texto en posición " + i + ": " + parrafos[i].innerHTML);
+            i++;
+        }
+
+        document.getElementsByClassName("mi_parrafo")[0].style.fontWeight = "900";
+        document.getElementsByClassName("mi_parrafo")[1].style.fontWeight = "900";
+    </script>
+
+    <p class="c1">Hola</p>
+    <p class="c1">Adios</p>
+
+    <script>
+        var x = document.querySelectorAll("p.c1");
+        document.write(x[0].innerHTML);
+        document.write("<br>");
+        document.write(x[1].innerHTML);
+    </script>
+
+    <p id="p1">Hola 1</p>
+    <p id="p2">Hola 2</p>
+    <script>
+        document.getElementById("p1").style.visibility = "hidden";
+        document.getElementById("p2").style.color = "blue";
+        document.getElementById("p2").style.fontFamily = "Arial";
+        document.getElementById("p2").style.fontSize = "larger";
+    </script>
+
+    <img id="image" src="img/bluey.png" width = "200">
+
+    <script>
+        document.getElementById("image").src = "img/bingo.png";
+    </script>
+
+</body>
+
+</html>

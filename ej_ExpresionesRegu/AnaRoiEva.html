@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ANA ROI EVA</title>
+    <meta charset="utf-8">
+    <script>
+        function generateTxt(size) {
+            const characters = "0123456789anaroieva ";
+            txt = "";
+            for (i = 0; i < size; i++) {
+                randomChar = Math.floor(Math.random() * characters.length);
+                txt += characters.charAt(randomChar);
+            }
+
+            document.getElementById("txt").innerHTML = txt;
+        }
+
+        function search() {
+            const textElement = document.getElementById("txt");
+            const regex = /\b(roi|ana|eva)\b/gi;
+            const matches = textElement.innerHTML.match(regex);
+            if (matches) {
+                for (const match of matches) {
+                    const index = textElement.innerHTML.indexOf(match);
+                    let color;
+                    let hyphenatedWord = match.split('').join('-');
+                    if (match.toLowerCase() === "ana") {
+                        color = "red";
+                    } else if (match.toLowerCase() === "roi") {
+                        color = "blue";
+                    } else if (match.toLowerCase() === "eva") {
+                        color = "green";
+                    }
+                    textElement.innerHTML = textElement.innerHTML.replace(match, `<span style="color: ${color}">${hyphenatedWord}</span> (Position: ${index})`);
+                }
+            }
+        }
+
+        window.onload = function () {
+            generateTxt(5000);
+            search();
+        };
+    </script>
+</head>
+
+<body>
+    <p id="txt"></p>
+</body>
+
+</html>
+
+<!--
+    function search() {
+            const searchWords = ["roi", "ana", "eva"];
+            const textElement = document.getElementById("txt");
+            for (const word of searchWords) {
+                const regex = new RegExp("\\b" + word + "\\b", "gi");
+                const matches = textElement.innerHTML.match(regex);
+                if (matches) {
+                    for (const match of matches) {
+                        const index = textElement.innerHTML.indexOf(match);
+                        textElement.innerHTML = textElement.innerHTML.replace(match, `<span style="color: red">${match}</span> (Position: ${index})`);
+                    }
+                }
+            }
+        }
+-->

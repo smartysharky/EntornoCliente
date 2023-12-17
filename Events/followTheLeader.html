@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Follow the leader</title>
+    <style>
+        label {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <label id="follower">Following...</label>
+
+    <script>
+        document.addEventListener("mousemove", function(event) {
+            var label = document.getElementById("follower");
+            var x = (event.clientX - 60) + window.pageXOffset;
+            var y = (event.clientY - 60) + window.pageYOffset;
+
+            label.style.left = x + "px";
+            label.style.top = y + "px";
+
+            document.getElementById("follower").innerHTML = "(" + event.clientY + " ," + event.clientX + ")";
+        });
+    </script>
+</body>
+</html>

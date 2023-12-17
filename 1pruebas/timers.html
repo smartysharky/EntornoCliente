@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo timer</title>
+    <script>
+        v01 = 0;
+        
+        function modificar(op) {
+            (op == 0) ? document.getElementById("result").innerHTML = v01++ : document.getElementById("result").innerHTML = v01--;
+        }
+
+        function empezar() {
+            if(document.getElementById("dec").checked){
+                op=1;
+            }else{
+                op=0;
+            }
+            t01 = setInterval(modificar, 500, op);
+        }
+    </script>
+</head>
+
+<body>
+    <label for="dec">Decrementar:
+        <input type="checkbox" name="operacion" id="dec" value="1">
+    </label>
+    <br>
+
+    <p id="result"></p>
+    <button id="empezar" onclick="empezar()">Empezar</button><button id="parar"onclick="clearInterval(t01)">Parar</button>
+</body>
+
+</html>

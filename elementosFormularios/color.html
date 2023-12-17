@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        El elemento color nos sirve para elejir un color.
+        En la función getColor() guardamos el color elegido en una variable y lo ponemos como color de fondo
+    -->
+    <head>
+        <title>Color</title>
+        <script>
+            function getColor(){
+                color = document.getElementById("color").value
+                document.body.style.backgroundColor = color;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Color</h1>
+        <input type="color" id="color">
+        <button onclick="getColor()">Submit</button>
+    </body>
+</html>

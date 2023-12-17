@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        El elemento date se utiliza para introducir una fecha.
+        En el ejemplo se introduce una fecha, en el método getDate() esta se guarda en una variable y luego se muestra en un párrafo
+    -->
+    <head>
+        <title>Date</title>
+        <script>
+            function getDate(){
+                date = document.getElementById("date").value;
+                document.getElementById("result").innerHTML = date;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Date</h1>
+        <label for="date">Fecha de nacimiento:</label>
+        <input type="date" id="date" name="date">
+        <br>
+        <button onclick="getDate()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

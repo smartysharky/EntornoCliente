@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Secundero</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            var ctx2 = canvas.getContext("2d");
+
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 250;
+
+            var angle = 0; // Inicializar el ángulo a 0
+            var parts = 60; // Dividir el círculo en el numero de partes deseadas partes
+            var interval = 1000; // Intervalo de tiempo en milisegundos
+
+            // Función que dibuja una parte del círculo en cada llamada
+            var drawPart = function () {
+                /*
+                Calcular el ángulo de finalización para esta parte
+                (0, 2 * Math.PI) -> ángulo representa una circunferencia completa por eso es el ángulo de finalización
+                lo dividemos entre las partes en las que queremos hacer la circunferencia para que nos de el angulo final de cada parte
+                */
+                var endAngle = angle + (2 * Math.PI) / parts;
+
+                /*
+                centerX centerY -> el centro del circulo
+                radius -> el radio. distancia que hay desde el centro de la circunferencia a el perímetro
+                endAngle -> angulo dnd acaba de dibujarse la parte
+                false -> (opcional) si se dibuja al contrario de las agujas del reloj o no
+                */
+                ctx.beginPath();
+
+                ctx.arc(centerX, centerY, radius, angle, endAngle, false);
+
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Actualizar el ángulo para la siguiente parte del círculo
+                angle = endAngle;
+
+                // Detener el dibujo después de completar el circulo
+                if (angle >= 2 * Math.PI) {
+                    clearInterval(intervalId);
+                }
+            };
+
+            var intervalId = setInterval(drawPart, interval);
+
+        });
+
+    </script>
+</body>
+
+</html>

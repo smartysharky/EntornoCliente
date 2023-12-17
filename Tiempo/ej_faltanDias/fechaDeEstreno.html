@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EL ESTRENO</title>
+    <script>
+
+        function clacularDif() {
+            releaseDate = new Date(2023, 10, 28, 5, 0, 0);
+            today = new Date();
+            dif = releaseDate - today;
+
+            if (dif < 0) {
+                window.alert("LA FECHA DE ESTRENO YA HA PASADO");
+            } else {
+                sec = Math.floor(dif / 1000);
+                secRem = sec % 60;
+                min = Math.floor(sec / 60) % 60;
+                hours = Math.floor(sec / 3600) % 24;
+                days = Math.floor(sec / 86400);
+
+                document.getElementById("time").innerHTML = days + " días, " + hours + " horas, " + min + " minutos y " + secRem + " segundos";
+            }
+        }
+
+        window.onload = function () {
+            clacularDif();
+        };
+
+        setInterval(clacularDif, 1000);
+    </script>
+</head>
+
+<body>
+    <p>Faltan <span id="time"></span> para el estreno!</p>
+</body>
+
+</html>

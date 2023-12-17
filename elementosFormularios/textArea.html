@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        textarea es un elemento que permite crear un cuadro de texto de varias líneas.
+        En este ejemplo con la funcion getText() cogemos el valor que tiene textarea, lo que se ha escrito dentro,
+        lo guardamos en una variable y lo mostramos como un párrafo. Al mismo tiempo borramos el contenido del textarea
+    -->
+    <head>
+        <title>Textarea</title>
+        <script>
+            function getText(){
+                text = document.getElementById("text").value;
+                document.getElementById("comment").innerHTML = text;
+                document.getElementById("text").value = "";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Textarea</h1>
+        <textarea id="text"></textarea>
+        <br>
+        <button onclick="getText()">Submit</button>
+        <p id="comment"></p>
+    </body>
+</html>

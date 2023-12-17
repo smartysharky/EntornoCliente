@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>prueva eventos</title>
+    <script>
+        function miFuncion() {
+            var x = document.getElementById("txt");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+</head>
+
+<body>
+    Introduzca texto: <input type="text" id="txt" onkeydown="miFuncion()">
+</body>
+
+</html>

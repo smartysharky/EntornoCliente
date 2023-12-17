@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>hola</title>
+    <script>
+        intervalTime = setInterval(time, 1000);
+
+        function time(){
+            myDate = new Date();
+            hours = myDate.getHours();
+            minutes = myDate.getMinutes();
+            seconds = myDate.getSeconds();
+
+            (hours < 10) ? hours = "0" + hours : "";
+            (minutes < 10) ? minutes = "0" + minutes : "";
+            (seconds < 10) ? seconds = "0" + seconds : "";
+
+            if(document.getElementById("time12").checked){
+                if(hours >= 13){
+                    hours -= 12;
+                    time = hours + ":" + minutes + ":" + seconds + " PM";
+                }else{
+                    time = hours + ":" + minutes + ":" + seconds + " AM";
+                }
+            }else{
+                time = hours + ":" + minutes + ":" + seconds;
+            }
+            document.getElementById("time").innerHTML = time;
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1><span id="time"></span></h1>
+    <button id="pause" onclick="clearInterval(intervalTime)">Pausa</button> <button id="resume" onclick="intervalTime = setInterval(time,1000);">Reaunidar</button>
+    <br>
+    <label for="mili">24
+        <input type="radio" id="time24" name="format">
+    </label>
+    <label for="normal">12
+        <input type="radio" id="time12" name="format">
+    </label>
+</body>
+
+</html>

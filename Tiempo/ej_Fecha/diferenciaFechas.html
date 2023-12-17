@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Diferencia de fechas</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <p id="fecha"><b>Fecha: </b></p>
+    <label for="fechaPas"><b>Fecha pasada: </b> 
+        <input type="text" id="day" name="fechaPas" size="1"> /
+        <input type="text" id="month" name="fechaPas" size="1"> /
+        <input type="text" id="year" name="fechaPas" size="2">
+    </label>
+
+    <br><br>
+    <button type="submit" onclick="calcularDif()">Calcular diferencia</button>
+    <br>
+    <p id="dif"></p>
+
+    <script>
+        function mostrarFechaActual() {
+            
+            fecha = new Date();
+            
+            fechaFormateada = fecha.toLocaleDateString();
+
+            document.getElementById("fecha").innerHTML += fechaFormateada;
+        }
+        mostrarFechaActual();
+
+        function calcularDif(){
+            fechaActual = new Date();
+
+            day = document.getElementById("day").value;
+            month = document.getElementById("month").value-1;
+            year = document.getElementById("year").value;
+
+            fechaPas = new Date(year, month, day);
+
+            dif = Math.floor(fechaActual - fechaPas);
+
+            allDays = Math.floor(dif / 86400000);
+
+            difYears = Math.floor(allDays/365);
+            difMonths = Math.floor((allDays%365)/30);
+            difDays = Math.floor((allDays%365)%30);
+
+            document.getElementById("dif").innerHTML = "<b>La diferencia es de " + difDays + " días, " + difMonths + " meses, y " + difYears + " años<b>";  
+        }
+    </script>
+</body>
+
+</html>

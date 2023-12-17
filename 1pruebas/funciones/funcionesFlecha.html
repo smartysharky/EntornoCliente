@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Funciones flecha</title>
+</head>
+
+<body>
+    <script>
+        document.write((function () { return "hello" })());
+
+        hola = () => { return "saludos"; }
+        document.write("<br>" + hola());
+        hola = () => "hola";
+        document.write("<br>" + hola());
+
+        var nombre = "Pepe";
+        saludar = saludo => saludo + nombre;
+        document.write("<br>" + saludar("Hola "));
+
+        sumar = (x, y) => x + y;
+        document.write("<br>" + sumar(6, 10));
+
+        /* esto esta mal hecho, las funciones flecha solo tiene una línea
+        si una funcion flecha tiene más de una línea es obligatorio usar el return*/
+        multiplicar = (x, y) => {
+            document.write("<br> Resultado:");
+            return x * y;
+        }
+        document.write("<br>" + multiplicar(2, 6));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        Text se usa para introducir una línea de texto, como por ejemplo un Nombre.
+        Se parece a textarea, con la diferenia de ue text se usa para introducir lineas de texto cortas.
+        En este ejemplo se pide el nombre, y usando la funcion getName() ese nombre se guarda en una variable y se muestra por pantalla como un párrafo.
+    -->
+    <head>
+        <title>Text</title>
+        <script>
+            function getName(){
+                name = document.getElementById("name").value;
+                document.getElementById("result").innerHTML = name;
+                document.getElementById("name").value = "";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Text</h1>
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name">
+        <br>
+        <button onclick="getName()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

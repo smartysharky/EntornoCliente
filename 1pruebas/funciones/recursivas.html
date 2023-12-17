@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prueba fun. recursivas</title>
+        <script>
+            function calculoFactorial(num){
+                if (num <=1 ){
+                    return num;
+                }
+                console.log(num);
+                return num * calculoFactorial(num-1);
+            }
+        </script>
+    </head>
+    <body>
+        <p id="prueba"></p>
+        <script>
+            document.getElementById("prueba").innerHTML = "El factorial es " + calculoFactorial(5);
+        </script>
+    </body>
+</html>

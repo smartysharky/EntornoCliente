@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <!--
+        El elemento radio nos sirve para seleccionar una opción en un grupo de ellas.
+        En este ejemplo se dan tres opciones, con el método getAwns() se comprueba cual es la opción elejida,
+        se guarda en una variable y luego se mustra por pantalla.
+    -->
+    <head>
+        <title>RadioBtn</title>
+        <script>
+            function getAwns(){
+                charac =document.querySelector('input[name="characDragon"]:checked').value;
+                document.getElementById("result").innerHTML = charac;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Textarea</h1>
+        <fieldset>
+            <legend>Elije una opción</legend>
+            <label>
+                <input type="radio" id="escamas" name="characDragon" value="Escamas"/>
+                Escamas
+            </label>
+            <br>
+            <label>
+                <input type="radio" id="cuernos" name="characDragon" value="Cuernos"/>
+                Cuernos
+            </label>
+            <br>
+            <label>
+                <input type="radio" id="alas" name="characDragon" value="Alas"/>
+                Alas
+            </label>
+        </fieldset>
+        <button onclick="getAwns()">Submit</button>
+        <p id="result"></p>
+    </body>
+</html>

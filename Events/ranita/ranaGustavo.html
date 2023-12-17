@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>La rana Gustavo</title>
+    <style>
+        img {
+            margin: 5px;
+            border: solid green;
+            position: absolute;
+        }
+
+        #box {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="gus" src="img/rana-Gustavo.jpg" width="15%">
+    <div id="box"></div>
+
+    <script>
+        var contador = 0; //cuenta cuantas veces salta la rana antes de q aparezca la caja
+        var boxExists = false; //existe la caja o no
+        var boxImg = document.createElement("img"); //crea el elemento para la img de la caja
+        var gameActive = true; //controla si el juego ya ha acabado
+
+        function checkCollision() {
+            if (gameActive) {
+                var img = document.getElementById('gus');
+                var box = document.getElementById('box');
+
+                //getBoundingClientRect() devuelve toda la infromación sobre el tamaño y posición de un elemento
+                var imgRect = img.getBoundingClientRect();
+                var boxRect = boxImg.getBoundingClientRect();
+
+                var gusX = imgRect.left; //devuelve x
+                var gusY = imgRect.top; //devuelve y
+
+                var boxX = boxRect.left; //devuelve x
+                var boxY = boxRect.top; //devuelve y
+
+                //comprueba si las imgagenes se estan tocando 
+                if (
+                    (gusX < boxX + boxImg.width) && //si el eje derecho de la rana esta a la izquirda de la caja
+                    (gusX + img.width > boxX) && //si el eje izquierdo de la rana + su anchura esta a la derecha del eje izquierdo de la caja
+                    (gusY < boxY + boxImg.height) && //si el eje de abajo de la rana esta por encima del eje de abajo de la caja
+                    (gusY + img.height > boxY) //si el eje de arriba de la rana + su altura esta por debajo del eje de arriba de la caja
+                ) {
+                    gameActive = false;
+                    
+                    setTimeout(function()
+                    {window.location.href = "win.html";}
+                     , 250);
+                }
+            }
+        }
+
+        function moveImage(event) {
+            if (gameActive) {
+                var img = document.getElementById('gus');
+                var box = document.getElementById('box');
+                var screenWidth = window.innerWidth; //anchura de la pantalla
+                var screenHeight = window.innerHeight; //altura de la pantalla
+
+                //coordenadas del ratón
+                var mouseX = event.clientX;
+                var mouseY = event.clientY;
+
+                var moveDistance = 100; //variable que marca la distancia a la que tiene que estar el ratón para que a rana se mueva
+
+                //nuevas coordenadas a donde se mueve la rana
+                var newX = Math.random() * (screenWidth - img.width);
+                var newY = Math.random() * (screenHeight - img.height);
+
+                //si el ratón esta dentro de la dstancia las coordenadas se cambian
+                if (Math.abs(newX - mouseX) < moveDistance) {
+                    if (newX < mouseX) {
+                        newX += -moveDistance;
+                    } else {
+                        newX += moveDistance;
+                    }
+                }
+
+                if (Math.abs(newY - mouseY) < moveDistance) {
+                    if (newY < mouseY) {
+                        newY += -moveDistance;
+                    } else {
+                        newY += moveDistance;
+                    }
+                }
+
+                img.style.left = newX + 'px';
+                img.style.top = newY + 'px';
+
+                contador++;
+
+                //cando la rana se haya movido 4 veces, la siguiente aparece la caja
+                if (contador == 4) {
+                    boxImg.src = "img/box.jpeg";
+                    boxImg.width = 150;
+                    box.appendChild(boxImg);
+                    boxExists = true;
+                }
+
+                if (boxExists) {
+                    checkCollision();
+                }
+            }
+
+        }
+
+        //la caja se mueve
+        function moveBox(event) {
+            if (gameActive) {
+                var box = document.getElementById('box');
+                var step = 20;
+
+                switch (event.key) {
+                    case 'w':
+                        box.style.top = Math.max(0, box.offsetTop - step) + 'px';
+                        break;
+                    case 'a':
+                        box.style.left = Math.max(0, box.offsetLeft - step) + 'px';
+                        break;
+                    case 's':
+                        box.style.top = Math.min(window.innerHeight - box.offsetHeight, box.offsetTop + step) + 'px';
+                        break;
+                    case 'd':
+                        box.style.left = Math.min(window.innerWidth - box.offsetWidth, box.offsetLeft + step) + 'px';
+                        break;
+                }
+            }
+        }
+
+        //la caja se hace grande
+        function bigger(){
+            if(gameActive){
+                width = boxImg.width;
+
+                if(width <= 300){
+                    boxImg.width = boxImg.width + 25;
+                }
+            }
+        }
+
+        var imgElement = document.getElementById('gus');
+        var boxElement = document.getElementById('box');
+
+        imgElement.addEventListener('mousemove', moveImage);
+        document.addEventListener('keydown', moveBox);
+        boxImg.addEventListener('click', bigger);
+
+    </script>
+</body>
+
+</html>

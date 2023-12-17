@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio búsqueda de palabras</title>
+    <meta charset="utf-8">
+    <script>
+        function lookWord() {
+            txt = document.getElementById("txt").innerHTML;
+            word = document.getElementById("search").value;
+
+            if (txt.search(word) > -1) {
+                document.getElementById("result").innerHTML = "Palabra encontrada";
+            } else {
+                document.getElementById("result").innerHTML = "Palabra NO encontrada";
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <p id="txt">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Nisi maxime temporibus voluptatem, sint,
+        deleniti exercitationem odit ratione adipisci eligendi animi praesentium necessitatibus ullam?
+        Esse, deleniti consequatur amet ducimus dolor corporis.<br>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Consequatur rerum praesentium amet, ea esse veniam, iure nulla inventore placeat explicabo, reprehenderit ullam.
+        Pariatur, at ducimus? Mollitia nobis dolore reprehenderit quaerat?<br>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Voluptatem consectetur perferendis perspiciatis enim quos officia at, consequatur autem sit, neque accusantium
+        animi?
+        Impedit praesentium magni nisi necessitatibus reprehenderit rem natus!<br>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Totam, magnam corporis pariatur maiores molestias perferendis odio nisi molestiae expedita perspiciatis!
+        Temporibus veritatis assumenda animi magni. Libero dignissimos vero odit sed.
+    </p>
+    <input type="text" id="search" placeholder="Buscar palabra...">
+    <button type="submit" onclick="lookWord()">Buscar</button>
+    <p id="result"></p>
+</body>
+
+</html>
