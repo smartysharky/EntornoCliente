@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Examen JS</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <label for="gradosK">Grados Kelvin:</label>
+    <input type="text" name="gradosK" id="kelvin">
+
+    <br><br>
+
+    <input type="checkbox" name="orden" id="orden">
+    <label for="orden">Orden ascendente</label>
+
+    <br>
+
+    <input type="radio" name="color" id="coloreado">
+    <label for="coloreado">Coloreado</label>
+    <input type="radio" name="color" id="contraste">
+    <label for="contraste">Alto contraste</label>
+
+    <br><br>
+
+    <!--
+        se le añade a las labels onmouseover llamadno a los métodos que eseñan los resultados corespondientes
+    -->
+    <label style="border: solid black 1px; padding: 2px;" onmouseover="mostrarCelcius()">Celsius</label>
+    <label style="border: solid black 1px; padding: 2px;" onmouseover="mostrarFar()">Farenheit</label>
+
+    <p>Salida:</p>
+    <p id="result"></p>
+
+    <script>
+        ordenarBtn = document.getElementById("orden");
+
+        //calcula los grados celcius y los devuelve en un array
+        function calcCelsius() {
+            kelvin = document.getElementById("kelvin").value;
+            temp = kelvin.split(",");//pasamos el valor del input a un array separandolo por comas
+
+            //con cada calor de ese array hacemos el calculo y cambiamos el valor
+            for (let index = 0; index < temp.length; index++) {
+                temp[index] = Math.floor(temp[index] - 273.15);
+            }
+
+            //devolvemos el array con los nuevos valores
+            return temp;
+        }
+
+        //calcula los grados celcius y los devuelve en un array
+        function calcFar() {
+            kelvin = document.getElementById("kelvin").value;
+            temp = kelvin.split(",");//pasamos el valor del input a un array separandolo por comas
+
+            //misma funcionalidad que la función calcCelsius() pero diferente operación
+            for (let index = 0; index < temp.length; index++) {
+                temp[index] = Math.floor(1.8 * (temp[index] - 273.15) + 32);
+            }
+
+            return temp;
+        }
+
+        //recorre la lista de numeros que se le da y va metiendolos en un nuevo array en orden ascendente
+        function ordenar(lista) {
+            listaOrd = new Array(lista.length);
+            num = 0;
+            i = 0;
+
+            lista.forEach(element => {
+                element = parseInt(element);
+
+                if (element > num) {
+                    listaOrd.push(element);
+                } else {
+                    listaOrd[i] = element;
+                    i++;
+                }
+                num = element;
+            });
+
+            return listaOrd;
+        }
+
+        //funciones para enseñar el resultado al pasar por encima de la label
+        function mostrarCelcius() {
+            if (ordenarBtn.checked) {
+                document.getElementById("result").innerHTML = ordenar(calcCelsius()).toString();
+            } else {
+                document.getElementById("result").innerHTML = calcCelsius().toString();
+            }
+
+        }
+
+        function mostrarFar() {
+            if (ordenarBtn.checked) {
+                document.getElementById("result").innerHTML = ordenar(calcFar()).toString();
+            } else {
+                document.getElementById("result").innerHTML = calcFar().toString();
+            }
+        }
+    </script>
+</body>
+
+</html>
