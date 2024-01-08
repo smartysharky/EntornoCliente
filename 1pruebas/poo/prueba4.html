@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <script>
+        var persona = {
+            nombre: "Pepe",
+            apellido: "Perez",
+            id: "",
+            set ide(id) {
+                this.id = id;
+            },
+            get ide() {
+                return this.id;
+            }
+        };
+        persona.ide = 123;
+        document.write(persona.ide);
+    </script>
+</body>
+
+</html>
