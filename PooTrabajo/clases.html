@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Declaración de una clase
+        class Animal {
+            //constructor de la clase
+            constructor(nombre, tipo) {
+                this.nombre = nombre;
+                this.tipo = tipo;
+            }
+
+            //método en la clase
+            presentacion() {
+                document.write("Mi nombre es: " + this.nombre + " y soy del tipo: " + this.tipo);
+            }
+        }
+
+        //Creación de un objeto
+        capybara = new Animal("Capybara", "mamífero");
+        //llamada a un métode de la clase
+        capybara.presentacion();
+    </script>
+</body>
+</html>

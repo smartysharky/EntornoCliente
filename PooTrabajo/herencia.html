@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Definición de la clase padre
+        class Artista {
+            constructor(nombre, edad, tipo) {
+                this.nombre = nombre;
+                this.edad = edad;
+                this.tipo = tipo;
+            }
+
+            presentacion() {
+                document.write("Me llamo " + this.nombre + " tengo " + this.edad + " años y soy " + this.tipo);
+            }
+        }
+
+        // Definición de la clase hija (Cantante) que hereda de Artista
+        class Cantante extends Artista {
+            constructor(nombre, edad, tipo, cancion) {
+                // Llamada al constructor de la clase padre
+                super(nombre, edad, tipo);
+                // Atributo específico de la clase hija
+                this.cancion = cancion;
+            }
+
+            // Sobrescribir el método presentacion de la clase padre
+            presentacion() {
+                document.write("Me llamo " + this.nombre + " tengo " + this.edad + " años y soy "
+                 + this.tipo + ". Mi canción más famosa es: " + this.cancion);
+            }
+        }
+
+        // Crear una instancia de la clase padre (Artista)
+        const artistaGenerico = new Artista("Antonio Machado", 64, "Artista");
+        artistaGenerico.presentacion();
+        document.write("<br>");
+        // Crear una instancia de la clase hija (Cantante)
+        const cantanteFamoso = new Cantante("Taylor Swift", 34, "Cantante", "Shake It Off");
+        cantanteFamoso.presentacion();
+    </script>
+</body>
+</html>

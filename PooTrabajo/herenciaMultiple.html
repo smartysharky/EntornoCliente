@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        // Mixin para la funcionalidad de invisibilidad
+        const invisibilidad = {
+            invisible() {
+                document.write("Me hago invisible");
+            }
+        };
+
+        // Mixin para la funcionalidad de teletransporte
+        const teletransporte = {
+            teletransporte() {
+                document.write("Me teletransporto");
+            }
+        };
+
+        // Clase base
+        class humano {
+            constructor(nombre) {
+                this.nombre = nombre;
+            }
+        }
+
+        // Clase que utilizará mixins para agregar funcionalidades
+        class SuperHumano extends humano {
+            constructor(nombre) {
+                super(nombre);
+            }
+        }
+
+        // Se añaden a la clase SuperHumano los métodos de invisibilidad y teletransporte
+        Object.assign(SuperHumano.prototype, invisibilidad, teletransporte);
+
+        const superman = new SuperHumano("Superman");
+
+        superman.invisible(); // Salida: Me hago invisible
+        document.write("<br>");
+        superman.teletransporte(); // Salida: Me teletransporto
+    </script>
+</body>
+</html>
