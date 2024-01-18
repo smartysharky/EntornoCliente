@@ -7,9 +7,9 @@ temporizador();
 function temporizador(){
     
     if(!anterior){
-        secuencia+=" "+actual;
+        secuencia = actual;
     }else{
-        secuencia+=" "+actual;
+        secuencia = actual;
     }
     postMessage(secuencia);
     

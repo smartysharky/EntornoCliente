@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contadores</title>
+    <meta charset="utf-8">
+</head>
+<body onload="startWorker()">
+    <fieldset>
+        <legend>CONTADOR 1</legend>
+        <button type="button" name="mas1" id="mas1">+</button>
+        <button type="button" name="menos1" id="menos1">-</button>
+        <p id="result1"></p>
+    </fieldset>
+    <fieldset>
+        <legend>CONTADOR 2</legend>
+        <button type="button" name="mas2" id="mas2">+</button>
+        <button type="button" name="menos2" id="menos2">-</button>
+        <p id="result2"></p>
+    </fieldset>
+
+    <br>
+    <button onclick="stopWorker()">Stop worker</button>
+
+    <script>
+        var worker1;
+        var worker2;
+
+        function startWorker() {
+            worker1 = new Worker("workerCont1.js");
+            worker2 = new Worker("workerCont2.js");
+
+            result1 = document.getElementById("result1");
+            result2 = document.getElementById("result2");
+            worker1.onmessage = e => result1.innerHTML = e.data;
+            worker2.onmessage = e => result2.innerHTML = e.data;
+        }        
+
+        function stopWorker() {
+            worker1.terminate();
+            worker2.terminate();
+
+            worker1 = undefine;
+            worker2 = undefine;
+        }
+    </script>
+</body>
+
+</html>

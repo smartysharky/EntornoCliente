@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <p>Secuencia de Fibonacci: <output id="result"></output></p>
-        <button onclick="startWorker()">Start worker</button>
-        <button onclick="stopWorker()">Stop worker</button>
-        <script>
-            var w;
-            function startWorker(){
-                if(typeof(Worker) !== "undefined"){
-                    if(typeof(w) == "undefined"){
-                        w = new Worker("ejemploTrabajador.js");
-                    }
-                    w.onmessage = function(event){
-                        document.getElementById("result").innerHTML = event.data;
-                    };
-                }else{
-                    document.getElementById("result").innerHTML = "Fallo al ejecutar el web worker";
-                }
-            }
 
-            function stopWorker(){
-                w.terminate();
-                w = undefine;
-            }
-        </script>
-    </body>
+<body>
+    <p>Secuencia de Fibonacci: <output id="result"></output></p>
+    <button onclick="startWorker()">Start worker</button>
+    <button onclick="stopWorker()">Stop worker</button>
+    <script>
+        var w;
+        function startWorker() {
+            w = new Worker("ejemploTrabajador.js");
+            result = document.getElementById("result");
+            w.onmessage = e => result.innerHTML = e.data;
+        }
+
+        function stopWorker() {
+            w.terminate();
+            w = undefine;
+        }
+    </script>
+</body>
+
 </html>
