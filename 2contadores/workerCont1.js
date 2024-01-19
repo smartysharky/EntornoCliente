@@ -1,21 +1,19 @@
-var anterior = 0;
-var actual = 1;
+var actual = 0;
 var secuencia = "";
-
-temporizador();
+var tiempo = 500;
+onmessage = function(e){
+    tiempo = tiempo - (e.data);
+};
 
 function temporizador(){
     
-    if(!anterior){
-        secuencia = actual;
-    }else{
-        secuencia = actual;
-    }
+    actual++;
+
+    secuencia = actual;
+
     postMessage(secuencia);
     
-    aux = anterior + actual;
-    anterior = actual;
-    actual = aux;
-    
-    setTimeout("temporizador()" , 500);
+    setTimeout("temporizador()" , tiempo);
 }
+
+temporizador();

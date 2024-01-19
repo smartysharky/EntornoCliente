@@ -1,47 +1,112 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Contadores</title>
     <meta charset="utf-8">
 </head>
+
 <body onload="startWorker()">
     <fieldset>
         <legend>CONTADOR 1</legend>
-        <button type="button" name="mas1" id="mas1">+</button>
-        <button type="button" name="menos1" id="menos1">-</button>
+        <button type="button" name="mas1" id="mas1" onclick="cambiarTiempo1('btnMas')">+</button>
+        <button type="button" name="menos1" id="menos1" onclick="cambiarTiempo1('btnMenos')">-</button>
+        <br><br>
+        <button type="button" name="parar1" id="parar1" onclick="stopWorker('parar1')">Parar</button>
+        <button type="button" name="reStart1" id="reStart1" onclick="startWorker('restart1')">Reiniciar</button>
         <p id="result1"></p>
     </fieldset>
     <fieldset>
         <legend>CONTADOR 2</legend>
-        <button type="button" name="mas2" id="mas2">+</button>
-        <button type="button" name="menos2" id="menos2">-</button>
+        <button type="button" name="mas2" id="mas2" onclick="cambiarTiempo2('btnMas')">+</button>
+        <button type="button" name="menos2" id="menos2" onclick="cambiarTiempo2('btnMenos')">-</button>
+        <br><br>
+        <button type="button" name="parar1" id="parar1" onclick="stopWorker('parar2')">Parar</button>
+        <button type="button" name="reStart2" id="reStart2" onclick="startWorker('restart2')">Reiniciar</button>
         <p id="result2"></p>
     </fieldset>
 
     <br>
-    <button onclick="stopWorker()">Stop worker</button>
+    <button onclick="stopWorker()">Stop Contadores</button>
 
     <script>
         var worker1;
         var worker2;
 
-        function startWorker() {
-            worker1 = new Worker("workerCont1.js");
-            worker2 = new Worker("workerCont2.js");
+        result1 = document.getElementById("result1");
+        result2 = document.getElementById("result2");
 
-            result1 = document.getElementById("result1");
-            result2 = document.getElementById("result2");
-            worker1.onmessage = e => result1.innerHTML = e.data;
-            worker2.onmessage = e => result2.innerHTML = e.data;
-        }        
-
-        function stopWorker() {
-            worker1.terminate();
-            worker2.terminate();
-
-            worker1 = undefine;
-            worker2 = undefine;
+        function createWorker(){
+            //funcion que lo único que hace es crear los workers
         }
+
+        function startWorker(boton) {
+
+            if (boton == "restart1") {
+                if (typeof (worker1) != "undefined") {
+                    stopWorker("parar1");
+
+                    worker1 = new Worker("workerCont1.js");
+                    worker1.onmessage = e => result1.innerHTML = e.data;
+                } else {
+                    worker1 = new Worker("workerCont1.js");
+                    worker1.onmessage = e => result1.innerHTML = e.data;
+                }
+
+            } else if (boton == "restart2") {
+                if (typeof (worker2) != "undefined") {
+                    stopWorker("parar2");
+
+                    worker2 = new Worker("workerCont2.js");
+                    worker2.onmessage = e => result2.innerHTML = e.data;
+                } else {
+                    worker2 = new Worker("workerCont2.js");
+                    worker2.onmessage = e => result2.innerHTML = e.data;
+                }
+
+            } else {
+                worker1 = new Worker("workerCont1.js");
+                worker2 = new Worker("workerCont2.js");
+
+                worker1.onmessage = e => result1.innerHTML = e.data;
+                worker2.onmessage = e => result2.innerHTML = e.data;
+            }
+
+        }
+
+        function stopWorker(boton) {
+
+            if (boton == "parar1") {
+                worker1.terminate();
+                worker1 = undefine;
+            } else if (boton == "parar2") {
+                worker2.terminate();
+                worker2 = undefine;
+            } else {
+                worker1.terminate();
+                worker2.terminate();
+                worker1 = undefine;
+                worker2 = undefine;
+            }
+
+        }
+
+        function cambiarTiempo1(boton) {
+            if (boton == "btnMas") {
+                worker1.postMessage(100);
+            } else if (boton == "btnMenos") {
+                worker1.postMessage(-100);
+            }
+        }
+
+        function cambiarTiempo2(boton) {
+            if (boton == "btnMas") {
+                worker2.postMessage(100);
+            } else if (boton == "btnMenos") {
+                worker2.postMessage(-100);
+            }
+        }
+
     </script>
 </body>
 
