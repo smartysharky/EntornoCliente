@@ -10,46 +10,46 @@
     <fieldset>
         <legend>Elije una ciudad</legend>
         <label>
-            <input type="radio" id="phili" name="zone" value="0" />
+            <input type="radio" id="phili" name="zone" value="0" onclick="getTimeZones()" />
             Philadelphia
         </label>
         <br>
         <label>
-            <input type="radio" id="madrid" name="zone" value="1" checked />
+            <input type="radio" id="madrid" name="zone" value="1" checked onclick="getTimeZones()" />
             Madrid
         </label>
         <br>
         <label>
-            <input type="radio" id="sydney" name="zone" value="2" />
+            <input type="radio" id="sydney" name="zone" value="2" onclick="getTimeZones()" />
             Sydney
         </label>
     </fieldset>
     <p id="result"></p>
     <script>
         function getTimeZones() {
-            zone = parseInt(document.querySelector('input[name="zone"]:checked').value);
+            zone = document.querySelector('input[name="zone"]:checked').value;
 
             worker = new Worker("horasMundialesWorker.js");
 
             worker.onmessage = function (e) {
-                actualTime = e.hours;
+                actualTime = e.data;
 
                 if (zone == 0) {
-                    actualTime -= 6;
+                    actualTime.getHours() -= 6;
                 } else if (zone == 2) {
-                    actualTime += 10;
+                    actualTime.getHours() += 10;
                 }
 
                 if (actualTime > 24) {
-                    actualTime -= 24;
+                    actualTime.getHours() -= 24;
                 } else if (actualTime < 0) {
-                    actualTime += 24;
+                    actualTime.getHours() += 24;
                 }
 
-                document.getElementById("result").innerHTML = actualTime + ":" + e.minutes + ":" + e.seconds;
-
-            };
+                document.getElementById("result").innerHTML = actualTime.getHours() + ":" + actualTime.getMinutes() + ":" + actualTime.getSeconds();
+            }
         }
     </script>
 </body>
+
 </html>
