@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo AJAX JSON</title>
+</head>
+
+<body>
+    <div id="lasFotos"></div>
+    <div id="lasNoticias"></div>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "fotos.txt"; //archivo con la info de las fotos
+
+        xmlhttp.onreadystatechange = function () { //se ejecuta esto cuando hay cambios en el fichero
+            if (this.readyState == 4 && this.status == 200) {
+                var listaFotos = JSON.parse(this.responseText); //parseamos el fichero a json
+                getFotos(listaFotos); //llamamos a la funcion para mostrar las fotos
+            }
+        };
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+        function getFotos(arr) {
+            var out = "";
+            var i;
+
+            //por cada foto del fichero (estan en un array) muestran por pantalla, cogiendo la info guardada en el json 
+            for (i = 0; i < arr.length; i++) {
+                out += '<img src="' + arr[i].url + '" width="15%"><br>' + arr[i].display + '<br>';
+            }
+
+            document.getElementById("lasFotos").innerHTML = out;
+        }
+
+        //NEWS
+
+        var xmlhttp2 = new XMLHttpRequest();
+        var url2 = "/../Documentos/news.txt";
+
+        xmlhttp2.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var listaNews = JSON.parse(this.responseText);
+                getNews(listaNews);
+            }
+        };
+
+        xmlhttp2.open("GET", url2, true);
+        xmlhttp2.send();
+
+        function getNews(arr) {
+            var out = "";
+            var i;
+
+            for (i = 0; i < arr.length; i++) {
+                out += '<h1>' + arr[i].titulo + '</h1><p>' + arr[i].info + '</p><br>';
+            }
+
+            document.getElementById("lasNoticias").innerHTML = out;
+        }
+
+        //setInterval(checkChange, 5000);
+    </script>
+</body>
+
+</html>
