@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo AJAX JSON 2</title>
+</head>
+
+<body>
+    <div id="lasFotos"></div>
+    <div id="lasNoticias"></div>
+    <script>
+        var urlFotos = "../fotos.txt"; //archivo con la info de las fotos
+        var urlNews = "../news.txt"; //archivo con la info de las noticias
+
+        /*
+        metodo: el metodo usado para enviar la request
+        url: donde se encuentra el fichero json
+        funcionLlamar: la funcion que indica que tiene que haver con la info del json
+        */
+        function newRequest(metodo, url, funcionLlamar) {
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function () { //se ejecuta esto cuando hay cambios en el fichero
+                if (this.readyState == 4 && this.status == 200) {
+                    var listaInfo = JSON.parse(this.responseText); //parseamos el fichero a json
+                    setInterval(funcionLlamar(listaInfo), 5000); //llamamos a la funcion que dice que hacer con esa info cada 5 segundos
+                }
+            };
+
+            xmlhttp.open(metodo, url, true); //abrimos la conexión
+
+            return xmlhttp; //devolvemos la conexión ya preparada
+        }
+
+        //pasamos parametros
+        var xmlhttp = newRequest("GET", urlFotos, getFotos); 
+        var xmlhttp2 = newRequest("GET", urlNews, getNews);
+        
+        //envio
+        xmlhttp.send(); 
+        xmlhttp2.send();
+
+        /*
+        arr: informacion que mostrar por pantalla
+        */
+        function getFotos(arr) {
+            var out = "";
+            var i;
+
+            for (i = 0; i < arr.length; i++) {
+                out += '<img src="' + arr[i].url + '" width="15%"><br>' + arr[i].display + '<br>';
+            }
+
+            document.getElementById("lasFotos").innerHTML = out;
+        }
+
+        /*
+        arr: informacion que mostrar por pantalla
+        */
+        function getNews(arr) {
+            var out = "";
+            var i;
+
+            for (i = 0; i < arr.length; i++) {
+                out += '<h1>' + arr[i].titulo + '</h1><p>' + arr[i].info + '</p><br>';
+            }
+            document.getElementById("lasNoticias").innerHTML = out;
+        }
+    </script>
+</body>
+
+</html>

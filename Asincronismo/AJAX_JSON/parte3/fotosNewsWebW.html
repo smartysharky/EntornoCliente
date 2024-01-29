@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo AJAX JSON 2</title>
+</head>
+
+<body>
+    <div id="lasFotos"></div>
+    <div id="lasNoticias"></div>
+    <script>
+
+        worker = new Worker("fotosWorker.js");
+        worker2 = new Worker("newsWorker.js");
+
+        worker.onmessage = function (e) {
+            e.open("GET", "../fotos.txt", true); //abrimos la conexión
+            e.send();
+        }
+        worker2.onmessage = function (e) {
+            e.open("GET", "../news.txt", true); //abrimos la conexión
+            e.send();
+        }
+    </script>
+</body>
+
+</html>

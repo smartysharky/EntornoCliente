@@ -10,7 +10,7 @@
     <div id="lasNoticias"></div>
     <script>
         var xmlhttp = new XMLHttpRequest();
-        var url = "fotos.txt"; //archivo con la info de las fotos
+        var url = "../fotos.txt"; //archivo con la info de las fotos
 
         xmlhttp.onreadystatechange = function () { //se ejecuta esto cuando hay cambios en el fichero
             if (this.readyState == 4 && this.status == 200) {
@@ -34,10 +34,10 @@
             document.getElementById("lasFotos").innerHTML = out;
         }
 
-        //NEWS
+        //NEWS (mismo funcionamiento que con las fotos)
 
         var xmlhttp2 = new XMLHttpRequest();
-        var url2 = "/../Documentos/news.txt";
+        var url2 = "../news.txt";
 
         xmlhttp2.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -60,7 +60,6 @@
             document.getElementById("lasNoticias").innerHTML = out;
         }
 
-        //setInterval(checkChange, 5000);
     </script>
 </body>
 

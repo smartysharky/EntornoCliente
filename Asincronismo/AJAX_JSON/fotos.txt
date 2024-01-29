@@ -1,16 +1,16 @@
 [
     {
         "display": "Taylor Swift con un grammy",
-        "url": "./pics/Taylor_Swift_oneG.jpg"
+        "url": "../pics/Taylor_Swift_oneG.jpg"
     },
 
     {
         "display": "Taylor Swift con dos grammy",
-        "url": "./pics/taylor_swift-twoG.jpg"
+        "url": "../pics/taylor_swift-twoG.jpg"
     },
 
     {
         "display": "Taylor Swift con tres grammy",
-        "url": "./pics/taylor-swift-grammys.jpg"
+        "url": "../pics/taylor-swift-grammys.jpg"
     }
 ]

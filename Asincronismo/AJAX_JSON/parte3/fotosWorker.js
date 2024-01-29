@@ -1,0 +1,29 @@
+function newRequest() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () { //se ejecuta esto cuando hay cambios en el fichero
+        if (this.readyState == 4 && this.status == 200) {
+            var listaInfo = JSON.parse(this.responseText); //parseamos el fichero a json
+            getFotos(listaInfo); //llamamos a la funcion que dice que hacer con esa info cada 5 segundos
+        }
+    };
+
+    postMessage(xmlhttp); //devolvemos la conexión ya preparada
+}
+
+/*
+arr: informacion que mostrar por pantalla
+*/
+function getFotos(arr) {
+    var out = "";
+    var i;
+
+    for (i = 0; i < arr.length; i++) {
+        out += '<img src="' + arr[i].url + '" width="15%"><br>' + arr[i].display + '<br>';
+    }
+
+    document.getElementById("lasFotos").innerHTML = out;
+}
+
+newRequest();
+setTimeout(newRequest, 5000);

@@ -1,0 +1,15 @@
+[
+    {
+        "titulo" : "Una noticia",
+        "info": "Infromación de la noticia"
+    },
+
+    {
+        "titulo":"Otra noticia",
+        "info" :"Infromación de la otra noticia"
+    },
+{
+        "titulo":"Otra noticia más",
+        "info" :"Infromación de la otra noticia más"
+    }
+]
