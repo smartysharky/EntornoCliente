@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Ejemplo AJAX JSON 2</title>
+    <title>Ejemplo AJAX JSON 3</title>
 </head>
 
 <body>
@@ -14,13 +14,25 @@
         worker2 = new Worker("newsWorker.js");
 
         worker.onmessage = function (e) {
-            e.open("GET", "../fotos.txt", true); //abrimos la conexión
-            e.send();
+            out = "";
+            for (i = 0; i < e.data.length; i++) {
+                out += '<img src="' + e.data[i].url + '" width="15%"><br>' + e.data[i].display + '<br>';
+            }
+
+            document.getElementById("lasFotos").innerHTML = out;
         }
+
+
         worker2.onmessage = function (e) {
-            e.open("GET", "../news.txt", true); //abrimos la conexión
-            e.send();
+            out = "";
+
+            for (i = 0; i < e.data.length; i++) {
+                out += '<h1>' + e.data[i].titulo + '</h1><p>' + e.data[i].info + '</p><br>';
+            }
+
+            document.getElementById("lasNoticias").innerHTML = out;
         }
+
     </script>
 </body>
 

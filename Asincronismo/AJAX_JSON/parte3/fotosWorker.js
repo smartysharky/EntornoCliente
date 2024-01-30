@@ -1,29 +1,32 @@
+fotos = [];
+
+xmlhttp = new XMLHttpRequest();
+url = "../fotos.txt";
+
+function getFotos(datos){
+    for (i = 0; i < datos.length; i++) {
+        registro = {};
+
+        registro.display = datos[i].display;
+        registro.url = datos[i].url;
+
+        fotos[i] = registro;
+    }
+}
+
 function newRequest() {
-    var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () { //se ejecuta esto cuando hay cambios en el fichero
         if (this.readyState == 4 && this.status == 200) {
             var listaInfo = JSON.parse(this.responseText); //parseamos el fichero a json
             getFotos(listaInfo); //llamamos a la funcion que dice que hacer con esa info cada 5 segundos
+            postMessage(fotos);
         }
     };
 
-    postMessage(xmlhttp); //devolvemos la conexión ya preparada
-}
-
-/*
-arr: informacion que mostrar por pantalla
-*/
-function getFotos(arr) {
-    var out = "";
-    var i;
-
-    for (i = 0; i < arr.length; i++) {
-        out += '<img src="' + arr[i].url + '" width="15%"><br>' + arr[i].display + '<br>';
-    }
-
-    document.getElementById("lasFotos").innerHTML = out;
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    setTimeout("newRequest()",5000);
 }
 
 newRequest();
-setTimeout(newRequest, 5000);
