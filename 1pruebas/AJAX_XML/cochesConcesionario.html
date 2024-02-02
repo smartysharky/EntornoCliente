@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p id="listado"></p>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                recuperarDatos(this);
+            }
+        };
+
+        xhttp.open("GET", "cochesMod.xml", true);
+        xhttp.send();
+
+        function recuperarDatos(xml) {
+            //contenido de la request (info q no nos interesa mucho)
+            console.log(xml);
+
+            var datos = "";
+            var xmlDatos = xml.responseXML;
+            //contenido del XML (info que nos interesa mucho)
+            console.log(xmlDatos);
+
+            concesionario = xmlDatos.getElementsByTagName("concesionario");
+
+            console.log(concesionario);
+
+            for (let a = 0; a < concesionario.length; a++) {
+                coches = concesionario[a].children;
+                console.log(coches);
+                datos += "<h1>Concesionario " + parseInt(a+1) + "</h1>";
+
+                for (i = 0; i < coches.length; i++) {
+                    elementos = coches[i].children;
+                    console.log(elementos);
+
+                    datos += "<h3>Coche " + parseInt(i+1) + "</h3>";
+                    for (j = 0; j < elementos.length; j++) {
+                        console.log(elementos[j]);
+                        datos += elementos[j].childNodes[0].nodeValue + "<br>";
+                    }
+                }
+            }
+
+
+            document.getElementById("listado").innerHTML = datos;
+        }
+    </script>
+</body>
+
+</html>

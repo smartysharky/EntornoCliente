@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p id="listado"></p>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                recuperarDatos(this);
+            }
+        };
+
+        xhttp.open("GET", "coches.xml", true);
+        xhttp.send();
+
+        function recuperarDatos(xml) {
+            //contenido de la request (info q no nos interesa mucho)
+            console.log(xml);
+
+            var datos = "";
+            var xmlDatos = xml.responseXML;
+            //contenido del XML (info que nos interesa mucho)
+            console.log(xmlDatos);
+
+            arrayCoches = xmlDatos.getElementsByTagName("coche");
+
+            console.log(arrayCoches);
+
+            for(i = 0; i < arrayCoches.length; i++){
+                console.log(arrayCoches[i].children);
+                datos += "<b>Coche " + i + "</b><br>";
+                for(j = 0; j < arrayCoches[i].children.length; j++){
+                    console.log(arrayCoches[i].children[j]);
+                    datos += arrayCoches[i].children[j].childNodes[0].nodeValue + "<br>"; 
+                }
+            }
+            
+            console.log(datos);
+            document.getElementById("listado").innerHTML = datos;
+        }
+    </script>
+</body>
+
+</html>
