@@ -1,0 +1,18 @@
+[
+    {
+      "titulo": "Taylor Swift única persona en la historia en conseguir 4 Grammys por mejor album",
+      "imagen_url": "img/Taylor-Swift-2024-GRAMMYs.jpg",
+      "contenido": "En los Grammys de 2024 Taylor Swift ha ganado mejor album por Midnights, uniendose a los otros tres que ya tenía por sus albumes Folklore, 1989 y Fearless de esta manera haciendo historia como la primera persona en tener 4 de estos premios"
+    },
+    {
+      "titulo": "Florida Man",
+      "imagen_url": "img/elmo.jpeg",
+      "contenido": "Hombre en Florida acusado por agresión tras lanzar un cocodrilo por el drive-thru de un Wendy's "
+    },
+    {
+      "titulo": "Dulce asesinato",
+      "imagen_url": "img/candycrush.png",
+      "contenido": "Una mujer en Venecia asesina a su compañera de piso. La causa, le mandaba demasiadas peticiones en el Candy Crush"
+    }
+]
+

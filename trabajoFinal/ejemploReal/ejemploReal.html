@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Últimas noticias</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Las noticias más noticias</h1>
+        <h3>El periódico online donde no te perderás nada</h3>
+        <div id="news"></div>
+        <script>
+            // Función para cargar y mostrar las noticias
+            function loadNews() {
+                
+                // archivo JSON con las noticias
+                const apiUrl = 'news.txt';
+
+                // Hacer la solicitud utilizando Fetch y devolver una promesa
+                fetch(apiUrl)
+                    .then(response => {
+                        // Verifica si la respuesta es exitosa (código de estado HTTP 200-299)
+                        if (response.ok) {
+                            // Si es exitosa, convierte la respuesta a JSON
+                            return response.json();
+                        } else {
+                            // Si la respuesta no es exitosa, lanza un error
+                            throw new Error('Error al obtener los datos');
+                        }
+                    })
+                    .then(newsData => {
+                        // Limpiar el contenido actual del div 'news'
+                        document.getElementById('news').innerHTML = '';
+
+                        // Iterar sobre las noticias y mostrarlas en el div 'news'
+                        newsData.forEach(newsItem => {
+                            const newsElement = document.createElement('div');
+                            newsElement.innerHTML = `
+                                <h2>${newsItem.titulo}</h2>
+                                <img src="${newsItem.imagen_url}" width="200"">
+                                <p>${newsItem.contenido}</p>
+                            `;
+                            document.getElementById('news').appendChild(newsElement);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            // Cargar las noticias inmediatamente al cargar la página
+            loadNews();
+
+            // Actualizar las noticias cada 5 segundos
+            setInterval(loadNews, 5000);
+        </script>
+    </body>
+</html>

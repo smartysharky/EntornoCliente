@@ -1,0 +1,27 @@
+[
+    {
+      "nombre": "Optimus Prime",
+      "tipo": "Autobot",
+      "arma": "Espada láser",
+      "habilidades": ["Liderazgo", "Combate cuerpo a cuerpo", "Transformación"]
+    },
+    {
+      "nombre": "Megatron",
+      "tipo": "Decepticon",
+      "arma": "Cañón de fusión",
+      "habilidades": ["Inteligencia estratégica", "Fuerza sobrehumana", "Transformación"]
+    },
+    {
+      "nombre": "R2-D2",
+      "tipo": "Astromech",
+      "arma": "No aplica",
+      "habilidades": ["Hacking de computadoras", "Reparación de naves espaciales", "Comunicación binaria"]
+    },
+    {
+      "nombre": "Bender",
+      "tipo": "Robot",
+      "arma": "Alcohol y cigarros",
+      "habilidades": ["Sarcasmo", "Robo de identidad", "Flexibilidad"]
+    }
+]
+

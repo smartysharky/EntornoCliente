@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo Simple</title>
+</head>
+
+<body>
+    <script>
+        // Función para hacer una solicitud a una API utilizando Fetch y devolver una promesa
+        function fetchData(url) {
+            return new Promise((resolve, reject) => {
+                fetch(url)
+                    .then(response => {
+                        // Verifica si la respuesta es exitosa
+                        if (response.ok) {
+                            // Si es exitosa, resuelve la promesa con los datos JSON de la respuesta
+                            resolve(response.json());
+                        } else {
+                            // Si la respuesta no es exitosa, rechaza la promesa con un mensaje de error
+                            reject('Error al obtener los datos');
+                        }
+                    })
+                    .catch(error => {
+                        // Si hay un error en la solicitud, rechaza la promesa con el error
+                        reject(error);
+                    });
+            });
+        }
+
+        const robots = 'robots.txt';
+
+        // Llama a la función fetchData con el fichero del json de los robots
+        fetchData(robots)
+            .then(data => {
+                // Se ejecuta cuando la promesa se resuelve exitosamente
+                console.log('Datos obtenidos:', data);
+            })
+            .catch(error => {
+                // Se ejecuta cuando la promesa es rechazada (por ejemplo, si hay un error en la solicitud)
+                console.error('Error:', error);
+            });
+
+    </script>
+</body>
+
+</html>
