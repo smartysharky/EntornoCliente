@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Examen prueba</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Escoge un tipo de luchador</legend>
+        <form>
+            <label>Fuego
+                <input type="radio" name="luchadorType" value="1" onclick="getLuchador()">
+            </label>
+            <label>Aire
+                <input type="radio" name="luchadorType" value="2" onclick="getLuchador()">
+            </label>
+            <label>Tierra
+                <input type="radio" name="luchadorType" value="3" onclick="getLuchador()">
+            </label>
+        </form>
+    </fieldset>
+    <div id="result"></div>
+    <script>
+        function getLuchador() {
+            ruta = "";
+            luchador = parseInt(document.querySelector("input[name='luchadorType']:checked").value);
+
+            switch (luchador) {
+                case 1:
+                    if (worker) {
+                        worker.terminate();
+                    }
+                    if (worker2) {
+                        worker2.terminate();
+                    }
+                    if (worker3) {
+                        worker3.terminate();
+                    }
+
+                    worker = new Worker("examenf.js");
+
+                    worker.onmessage = function (e) {
+                        out = "";
+
+                        for (let i = 0; i < e.data.length; i++) {
+                            out += "Abilidad: " + e.data[i].abilidad +
+                                "<br> Descripción: " + e.data[i].descripcion + "<br>";
+                        }
+
+                        document.getElementById("result").innerHTML = out;
+                    }
+
+                    break;
+
+                case 2:
+                    if (worker) {
+                        worker.terminate();
+                    }
+                    if (worker2) {
+                        worker2.terminate();
+                    }
+                    if (worker3) {
+                        worker3.terminate();
+                    }
+
+                    worker2 = new Worker("examena.js");
+
+                    worker2.onmessage = function (e) {
+                        out = "";
+
+                        for (let i = 0; i < e.data.length; i++) {
+                            out += "Abilidad: " + e.data[i].abilidad +
+                                "<br> Descripción: " + e.data[i].descripcion + "<br>";
+                        }
+
+                        document.getElementById("result").innerHTML = out;
+                    }
+
+                    break;
+
+                case 3:
+                    if (worker) {
+                        worker.terminate();
+                    }
+                    if (worker2) {
+                        worker2.terminate();
+                    }
+                    if (worker3) {
+                        worker3.terminate();
+                    }
+
+                    worker3 = new Worker("exament.js");
+
+                    worker3.onmessage = function (e) {
+                        out = "";
+
+                        for (let i = 0; i < e.data.length; i++) {
+                            out += "Abilidad: " + e.data[i].abilidad +
+                                "<br> Descripción: " + e.data[i].descripcion + "<br>";
+                        }
+
+                        document.getElementById("result").innerHTML = out;
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

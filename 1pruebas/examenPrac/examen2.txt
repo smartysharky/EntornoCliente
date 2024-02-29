@@ -1,0 +1,16 @@
+[
+    {
+        "abilidad": "1a",
+        "descripcion": "muy chula"
+    },
+
+    {
+        "abilidad": "2a",
+        "descripcion": "super chula"
+    },
+
+    {
+        "abilidad": "3a",
+        "descripcion": "hiper chula"
+    }
+]

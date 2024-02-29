@@ -1,0 +1,16 @@
+[
+    {
+        "abilidad": "1t",
+        "descripcion": "muy chula"
+    },
+
+    {
+        "abilidad": "2t",
+        "descripcion": "super chula"
+    },
+
+    {
+        "abilidad": "3t",
+        "descripcion": "hiper chula"
+    }
+]
