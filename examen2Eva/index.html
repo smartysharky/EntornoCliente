@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Examen 2 evaluación</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <fieldset>
+            <legend>Elija una comunidad</legend>
+            <label for="galicia">Galicia
+                <input type="radio" name="comunidad" id="galicia" onchange="leerXML('galicia.xml')">
+            </label>
+            <label for="aragon">Aragon
+                <input type="radio" name="comunidad" id="aragon" onchange="leerXML('aragon.xml')">
+            </label>
+        </fieldset>
+        <br>
+
+        <label for="orden">Ordenar
+            <input type="checkbox" name="orden" id="orden">
+        </label>
+        <br><br>
+
+        <label for="provincias">Provincias:
+            <select id="provincias" onchange="leerJSON()"></select>
+        </label>
+        <br><br>
+
+        <textarea id="habitantes"></textarea>
+        <br><br>
+
+        <div id="reloj"></div>
+
+        <script>
+
+            worker = new Worker("reloj.js");
+
+            worker.onmessage = function(event) {
+                horas = event.data.getHours();
+                minutos = event.data.getMinutes();
+                segundos = event.data.getSeconds();
+                time = "";
+
+                if(horas > 12) {
+                    horas = horas - 12;
+                    time = "PM";
+                }else{
+                    time = "AM";
+                }
+
+                if(horas < 10){
+                    horas = "0" + horas;
+                }
+                if(minutos < 10){
+                    minutos = "0" + minutos;
+                }
+                if(segundos < 10){
+                    segundos = "0" + segundos;
+                }
+
+                document.getElementById("reloj").innerHTML = horas + ":" + minutos + ":" + segundos + " " + time;
+            }
+
+            function leerXML(fichero){
+
+                xml = new XMLHttpRequest();
+
+                xml.onreadystatechange = function(){
+                    if(this.readyState == 4 & this.status == 200){
+                        datos = this.responseXML;
+                        provincias = datos.getElementsByTagName("provincia");
+                        rellenarSelect(provincias);
+                    }
+                }
+
+                xml.open("GET", fichero, true);
+                xml.send();
+            }
+
+            function rellenarSelect(datos){
+                out = "<option value=''>Elije una opción</option>";
+
+                for (let index = 0; index < datos.length ; index++) {
+                    out += "<option value='"+ datos[index].innerHTML +"'>"+ datos[index].innerHTML +"</option>";
+                }
+
+                document.getElementById("provincias").innerHTML = out;
+            }
+
+            function leerJSON(){
+                json = new XMLHttpRequest();
+
+                json.onreadystatechange = function(){
+                    if(this.readyState == 4 & this.status == 200){
+                        datos = JSON.parse(this.responseText);
+                        showHabitantes(datos);
+                    }
+                }
+
+                json.open("GET", "provincias.json", true);
+                json.send();
+            }
+
+            function showHabitantes(datos){
+                out ="";
+                provincia = document.getElementById("provincias").value;
+                area = document.getElementById("habitantes");
+
+                datos.forEach(element => {
+                   if(element["provincia"] == provincia) {
+                    out += element["habitantes"];
+                   }
+                });
+                
+                area.innerHTML = out;
+            }
+
+            window.onload = rellenarSelect;
+        </script>
+    </body>
+</html>

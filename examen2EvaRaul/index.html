@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Raul - Ex 2 Eval DWCC</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body onload="tiempo()">
+    <input type="radio" name="comunidad" id="galicia" onclick="leerXML('galicia')">
+    <label for="galicia">Galicia</label>
+    <input type="radio" name="comunidad" id="aragon" onclick="leerXML('aragon')">
+    <label for="aragon">Aragon</label><br><br>
+    <label for="provincias">Provincias:</label>
+    <select id="provincias" name="provincias" onclick="leerJSON(this.value)">
+        <option value="">Selecione una opción de los radio buttons</option>
+    </select><br><br>
+    <input type="checkbox" name="ordenar" id="ordenar">
+    <label for="ordenar">Orden ascendente</label><br><br>
+    <textarea id="habitantes" name="habitantes"></textarea><br><br>
+    <p id="tiempo"></p>
+    <script>
+        var xml = new XMLHttpRequest();
+
+        // Esta función lee el archivo xml de la comunidad pasada como parametro
+        function leerXML(comunidad) {
+            xml.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    formatoXML(this.responseXML);
+                }
+            }
+            xml.open("GET", comunidad + ".xml", true);
+            xml.send();
+        }
+
+        // Esta función muestra las provincias recogidas del xml en el select
+        function formatoXML(xml) {
+            if (xml != undefined) {
+                out = "";
+                var array = xml.firstChild.getElementsByTagName("provincia");
+
+                for (let i = 0; i < array.length; i++) {
+                    out += "<option value=" + i + ">" + array[i].firstChild.nodeValue + "</option>";
+                }
+                document.getElementById("provincias").innerHTML = out;
+            }
+        }
+
+        // Está función carga el JSON y se lo pasa al hilo principal
+        function leerJSON(indice) {
+            xml.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    formatoJSON(JSON.parse(this.responseText), indice);
+                }
+            }
+            xml.open("GET", "provincias.json", true);
+            xml.send();
+        }
+
+        // Esta función da formato al array de objetos del Worker
+        function formatoJSON(json, indice) {
+            var provincias = [];
+            out = "";
+
+            for (let i = 0; i < json.length; i++) {
+                provincia = {};
+
+                provincia.nombre = json[i]["nombre"];
+                provincia.comunidad = json[i]["comunidad"];
+                provincia.habitantes = json[i]["habitantes"];
+
+                if (i == indice) {
+                    out += provincia.habitantes;
+                }
+                provincias[i] = provincia;
+            }
+
+            document.getElementById("habitantes").innerText = out;
+        }
+
+        // Está función obtiene la hora actual y la muestra por pantalla
+        function tiempo() {
+            var worker = new Worker("tiempo.js");
+            worker.onmessage = (e) => {
+
+                let horas = e["data"].getHours();
+                let minutos = e["data"].getMinutes();
+                let segundos = e["data"].getSeconds();
+
+                (horas < 10) ? horas = "0" + horas : horas = horas;
+                (minutos < 10) ? minutos = "0" + minutos : minutos = minutos;
+                (segundos < 10) ? segundos = "0" + segundos : segundos = segundos;
+
+                document.getElementById("tiempo").innerText = horas + ":" + minutos + ":" + segundos;
+            };
+        }
+    </script>
+</body>
+
+</html>
